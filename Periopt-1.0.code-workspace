@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "periopt-aws:VISTA",
+			"uri": "isfs://periopt-aws:vista/"
+		},
+		{
+			"name": "Periopt_1-0 - periopt-aws:VISTA",
+			"uri": "isfs-readonly://periopt-aws:vista/?project=Periopt_1-0"
+		}
+	],
+	"settings": {}
+}

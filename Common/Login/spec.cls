@@ -1,0 +1,190 @@
+Class REST.SwitchLane.Periopt.Common.Login.spec Extends %REST.Spec [ ProcedureBlock ]
+{
+
+XData OpenAPI [ MimeType = application/json ]
+{
+{
+  "info":{
+    "title":"Login Service",
+    "description":"A REST Service to allow VistA User Authentication at a specified site",
+    "version":"2.0",
+    "x-ISC_Namespace":"DEVTST"
+  },
+  "paths":{
+    "/_spec": {
+      "get":{
+        "operationId":"getSpec",
+        "description":"This OpenAPI Spec",
+        "x-ISC_ServiceMethod":"GetSpec",
+        "x-ISC_CORS":false,
+        "produces":[
+          "application/json"
+        ],
+        "responses":{
+          "200":{
+            "description":"Successful operation"
+            }
+          }
+        }
+    },
+    "/user/login":{
+      "post":{
+        "operationId":"Login",
+        "parameters":[
+          {
+            "in":"header",
+            "name":"appname",
+            "required":true,
+            "type":"string"
+          },
+          {
+            "in":"header",
+            "name":"namespace",
+            "required":true,
+            "type":"string"
+          },
+          {
+            "in":"header",
+            "name":"options",
+            "required":false,
+			"type":"array",
+            "items":{
+              "type":"string"
+            },
+            "collectionFormat":"csv"
+          },
+          {
+            "in":"header",
+            "name":"keys",
+            "required":false,
+			"type":"array",
+            "items":{
+              "type":"string"
+            },
+            "collectionFormat":"csv"
+          },
+          {
+            "description":"Request body contents",
+            "name":"body",
+            "in":"body",
+            "schema":{
+              "type":"object",
+              "properties":{
+                "SecId":{
+                  "type":"string"
+                }
+              }
+            }
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"successfully returned user object",
+            "schema":{
+              "$ref":"#/definitions/User"
+            }
+          },
+          "500":{
+            "description":"(Internal Server Error)",
+            "schema":{
+              "$ref":"#/definitions/Error"
+            }
+          }
+        },
+        "x-ISC_ServiceMethod":"Login",
+        "x-ISC_CORS":true,
+        "x-codegen-request-body-name":"payloadBody",
+        "consumes":[
+        ]
+      }
+    },
+    "/user/welcome":{
+      "get":{
+        "operationId":"GetWelcomeMessage",
+        "responses":{
+          "200":{
+            "description":"Text containing Facility VistA welcome message",
+            "schema":{
+              "type":"object",
+              "properties":{
+                "welcomeMessage":{
+                  "type":"string"
+                }
+              }
+            }
+          },
+          "500":{
+            "description":"Internal server error",
+            "schema":{
+              "$ref":"#/definitions/Error"
+            }
+          }
+        },
+        "x-ISC_ServiceMethod":"GetWelcomeMessage",
+        "x-ISC_CORS":true,
+        "parameters":[
+        ]
+      }
+    }
+  },
+  "definitions":{
+    "Error":{
+      "type":"object",
+      "properties":{
+        "summary":{
+          "type":"string"
+        },
+        "errors":{
+          "type":"array",
+          "items":{
+            "$ref":"#/definitions/ErrorItem"
+          }
+        }
+      }
+    },
+    "ErrorItem":{
+      "type":"object",
+      "properties":{
+        "code":{
+          "type":"integer"
+        },
+        "domain":{
+          "type":"string"
+        },
+        "error":{
+          "type":"string"
+        },
+        "id":{
+          "type":"string"
+        }
+      }
+    },
+    "User":{
+      "type":"object",
+      "properties":{
+        "DUZ":{
+          "type":"string"
+        },
+        "SiteCode":{
+          "type":"string"
+        },
+        "Division":{
+          "type":"string"
+        },
+        "FacilityName":{
+          "type":"string"
+        }
+      }
+    }
+  },
+  "swagger":"2.0",
+  "schemes":[
+    "https"
+  ],
+  "basePath":"/api/REST/auth",
+  "x-components":{
+  }
+}
+}
+
+}
