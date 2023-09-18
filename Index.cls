@@ -172,6 +172,7 @@ ClassMethod ReturnJSONAckMsg(pInput As %DynamicObject, pRejectReason As %String)
    	s apptResponseMsg.SurgeryCaseNumber=$p(pInput,"^",5)
    	s msglen=$l(apptResponseMsg)
 	s tMsg=##class(%GlobalCharacterStream).%New()
+	/*
 	d tMsg.CopyFrom(pStream)
 	d pResponseBody.StreamSet(tMsg)
 	d pResponseBody.HTTPHeaders.SetAt("application/json","Content-Type")
@@ -179,6 +180,7 @@ ClassMethod ReturnJSONAckMsg(pInput As %DynamicObject, pRejectReason As %String)
 	d pResponseBody.HTTPHeaders.SetAt("application/json","Accept")
    	
    	d pResponseBody.%JSONExport()
+	*/
    	quit 1 ;pResponseBody
 }
 
@@ -332,6 +334,7 @@ ClassMethod getProviders(search) As %Status [ PublicList = (U, DT, DUZ, List, pL
 	.d GETS^DIQ(200,ien,".01;.131;8;41.99;53.2;53.5;205.1;205.5","IE","List","PROVERR")
 	.s provList.ProviderName=List(200,ien,.01,"E")
 	.s provList.DEANumber=List(200,ien,53.2,"E")
+	.s provList.Specialty=$$GET1^DIQ(200,DUZ_",",53.5,"I")_"^"_$$GET1^DIQ(200,DUZ_",",53.5,"E")
 	.s provList.Duz=XX
 	.s provList.Email=List(200,ien,205.5,"E")
 	.s provList.Phone=List(200,ien,.131,"E")
